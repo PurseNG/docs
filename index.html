@@ -228,7 +228,7 @@
       <div class="content">
         <h1 id="introduction">Introduction</h1>
 
-<p>Welcome to our simple-to-use REST APIs, accepting payments in your applications with Purse is a only a request or two away. To get started, grab yourself a <a href="https://purse.ng">free merchant account</a> you can test the endpoints against. Once you are logged into your account, you would have access to a test key so you can start making API requests with no further ado.</p>
+<p>Welcome to our simple-to-use REST APIs, accepting payments in your applications with Purse is a only a request or two away. To get started, grab yourself a <a href="https://purse.ng/register">free merchant account</a> you can test the endpoints against. Once you are logged into your account, you would have access to a test key so you can start making API requests with no further ado.</p>
 
 <p>The sample requests shown here are made with <a href="http://curl.haxx.se/">cURL</a> but you can make use of any HTTP client to test our endpoints. An easy pick to quickly start making API calls would be <a href="https://chrome.google.com/webstore/detail/postman-rest-client/fdmmgilgnpjigdojojpjoooidkmcomcm/">POSTMAN</a>, an awesome Chrome extension we love to use ourselves.</p>
 
@@ -262,7 +262,8 @@ You must replace <code>g4Cbu09M75w1kEYIKHRmXaRCINxglbR1uWkXyg1X</code> with your
 -H <span class="s2">"Authorization: Purse API_KEY"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -d <span class="s1">'{
-  "walletMsisdn":"2348052678757",
+  "customerCountryCode":"234",
+  "customerPhoneNumber":"08052000000",
   "narration":"Coffee Payment",
   "totalAmount":3000
 }'</span> <span class="se">\ </span>
@@ -271,23 +272,16 @@ You must replace <code>g4Cbu09M75w1kEYIKHRmXaRCINxglbR1uWkXyg1X</code> with your
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
-<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fluffums"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"calico"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hi, you are new with Purse. Please dial *206*4040#(GLO, ETISALAT, AIRTEL) or *510*4040#(MTN) to opt-in and authenticate this transaction."</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"invoiceRef"</span><span class="p">:</span><span class="w"> </span><span class="s2">"928397da-1ed1-11e7-bff5-0a80cc3ac5be"</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre>
+<blockquote>
+<p>&ldquo;message&rdquo; fro above should be displayed to your customer to give direction on how to approve the invoice.</p>
+</blockquote>
+
 <p>This endpoint creates an invoice on Purse.</p>
 
 <h3 id="http-request">HTTP Request</h3>
