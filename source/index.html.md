@@ -16,7 +16,7 @@ search: true
 
 # Introduction
 
-Welcome to our simple-to-use REST APIs, accepting payments in your applications with Purse is a only a request or two away. To get started, grab yourself a [free merchant account](https://purse.ng) you can test the endpoints against. Once you are logged into your account, you would have access to a test key so you can start making API requests with no further ado.
+Welcome to our simple-to-use REST APIs, accepting payments in your applications with Purse is a only a request or two away. To get started, grab yourself a [free merchant account](https://purse.ng/register) you can test the endpoints against. Once you are logged into your account, you would have access to a test key so you can start making API requests with no further ado.
 
 The sample requests shown here are made with [cURL](http://curl.haxx.se/) but you can make use of any HTTP client to test our endpoints. An easy pick to quickly start making API calls would be [POSTMAN](https://chrome.google.com/webstore/detail/postman-rest-client/fdmmgilgnpjigdojojpjoooidkmcomcm/), an awesome Chrome extension we love to use ourselves.
 
@@ -52,7 +52,8 @@ curl "https://staging.purse.ng/invoices" \
 -H "Authorization: Purse API_KEY" \
 -H "Content-Type: application/json" \
 -d '{
-  "walletMsisdn":"2348052678757",
+  "customerCountryCode":"234",
+  "customerPhoneNumber":"08052000000",
   "narration":"Coffee Payment",
   "totalAmount":3000
 }' \ 
@@ -62,23 +63,14 @@ curl "https://staging.purse.ng/invoices" \
 > The above command returns JSON structured like this:
 
 ```json
-[
-  {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
-  },
-  {
-    "id": 2,
-    "name": "Max",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
-  }
-]
+{
+  "code": "00",
+  "message": "Hi, you are new with Purse. Please dial *206*4040#(GLO, ETISALAT, AIRTEL) or *510*4040#(MTN) to opt-in and authenticate this transaction.",
+  "invoiceRef": "928397da-1ed1-11e7-bff5-0a80cc3ac5be"
+}
 ```
+
+> "message" fro above should be displayed to your customer to give direction on how to approve the invoice.
 
 This endpoint creates an invoice on Purse.
 
