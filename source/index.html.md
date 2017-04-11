@@ -3,9 +3,6 @@ title: API Reference
 
 language_tabs:
   - shell
-  - ruby
-  - python
-  - javascript
 
 toc_footers:
   - <a href='#'>Sign Up for a Developer Key</a>
@@ -19,80 +16,47 @@ search: true
 
 # Introduction
 
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
+Welcome to our simple-to-use REST APIs, accepting payments in your applications with Purse is a only a request or two away. To get started, grab yourself a [free merchant account](https://purse.ng) you can test the endpoints against. Once you are logged into your account, you would have access to a test key so you can start making API requests with no further ado.
 
-We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
+The sample requests shown here are made with [cURL](http://curl.haxx.se/) but you can make use of any HTTP client to test our endpoints. An easy pick to quickly start making API calls would be [POSTMAN](https://chrome.google.com/webstore/detail/postman-rest-client/fdmmgilgnpjigdojojpjoooidkmcomcm/), an awesome Chrome extension we love to use ourselves.
 
-This example API documentation page was created with [Slate](https://github.com/tripit/slate). Feel free to edit it and use it as a base for your own API's documentation.
+Both request body data and response data are formatted as JSON. Content type for responses will always be application/json.
 
 # Authentication
 
-> To authorize, use this code:
+To get authenticated on Purse, please include your API key in the Authorization header of every request you make to our endpoints.
 
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-```
+> All you need to do is format your request header like:
 
 ```shell
 # With shell, you can just pass the correct header with each request
 curl "api_endpoint_here"
-  -H "Authorization: meowmeowmeow"
+  -H "Authorization: Purse g4Cbu09M75w1kEYIKHRmXaRCINxglbR1uWkXyg1X"
 ```
 
-```javascript
-const kittn = require('kittn');
+> Make sure to replace `g4Cbu09M75w1kEYIKHRmXaRCINxglbR1uWkXyg1X` with your API key.
 
-let api = kittn.authorize('meowmeowmeow');
-```
-
-> Make sure to replace `meowmeowmeow` with your API key.
-
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
-
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
-
-`Authorization: meowmeowmeow`
+`Authorization: Purse g4Cbu09M75w1kEYIKHRmXaRCINxglbR1uWkXyg1X`
 
 <aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
+You must replace <code>g4Cbu09M75w1kEYIKHRmXaRCINxglbR1uWkXyg1X</code> with your personal API key.
 </aside>
 
-# Kittens
+# Invoices
 
-## Get All Kittens
+## Create an Invoice
 
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
-```
 
 ```shell
-curl "http://example.com/api/kittens"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let kittens = api.kittens.get();
+curl "https://staging.purse.ng/invoices" \
+-H "Authorization: Purse API_KEY" \
+-H "Content-Type: application/json" \
+-d '{
+  "walletMsisdn":"2348052678757",
+  "narration":"Coffee Payment",
+  "totalAmount":3000
+}' \ 
+-X POST
 ```
 
 > The above command returns JSON structured like this:
@@ -116,18 +80,20 @@ let kittens = api.kittens.get();
 ]
 ```
 
-This endpoint retrieves all kittens.
+This endpoint creates an invoice on Purse.
 
 ### HTTP Request
 
-`GET http://example.com/api/kittens`
+`POST http://staging.purse.ng/api/invoices`
 
-### Query Parameters
+### Post Parameters
 
-Parameter | Default | Description
---------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
+Parameter | Description
+--------- | ------- 
+walletMsisdn | Customer's ID on Purse.
+narration | A description for the charge/transaction.
+totalAmount | Total amount to charge in naira.
+
 
 <aside class="success">
 Remember — a happy kitten is an authenticated kitten!
