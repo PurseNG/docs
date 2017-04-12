@@ -1,20 +1,29 @@
 # Errors
 
-<aside class="notice">This error section is stored in a separate file in `includes/_errors.md`. Slate allows you to optionally separate out your docs into many files...just save them to the `includes` folder and add them to the top of your `index.md`'s frontmatter. Files are included in the order listed.</aside>
+Purse uses conventional HTTP response codes to indicate the success or failure of an API request. Http response codes in the 2xx range simply mean all went fine and your request was successful. While Http status code is enough indication that a request was successful, we strongly recommend that you check the "code" parameter in the body of our response to be sure your request was trully successful. All Http response codes in the range of 4xx and 5xx indicates failure and we would provide additional information in the body of every response.
 
-The Kittn API uses the following error codes:
+
+## Http Status Codes
 
 
 Error Code | Meaning
 ---------- | -------
-400 | Bad Request -- Your request sucks
-401 | Unauthorized -- Your API key is wrong
-403 | Forbidden -- The kitten requested is hidden for administrators only
-404 | Not Found -- The specified kitten could not be found
-405 | Method Not Allowed -- You tried to access a kitten with an invalid method
-406 | Not Acceptable -- You requested a format that isn't json
-410 | Gone -- The kitten requested has been removed from our servers
-418 | I'm a teapot
-429 | Too Many Requests -- You're requesting too many kittens! Slow down!
+400 | Bad Request -- The request was invalid.
+401 | Unauthorized -- Your API key is wrong or missing.
+404 | Not Found -- The requested resource doesn't exist.
+405 | Method Not Allowed -- Most likely wrong http method
 500 | Internal Server Error -- We had a problem with our server. Try again later.
-503 | Service Unavailable -- We're temporarily offline for maintenance. Please try again later.
+
+
+## Error Response
+
+In addition to Http Status Codes we always send data in our response to provide more information on an error. 
+
+### Error Response Parameters
+
+Parameter | Description
+--------- | -----------
+code | This is Purse specific code for an error. "00" indicates success while every other code indicates failure.
+message | This description of the error.
+
+<aside class="notice">code "00" means your request was sucessfull. Every other code indicates failure</aside>

@@ -83,7 +83,7 @@ This endpoint creates an invoice on Purse. The created invoice is also pushed to
 Parameter | Description
 --------- | ------- 
 customerCountryCode | Customer's Country Code.
-customerPhoneNumber | Customer's Phone Number. It is also customer's ID on Purse.
+customerPhoneNumber | Customer's Phone Number.
 narration | A description for the charge/transaction.
 totalAmount | Total amount to charge in naira.
 
@@ -111,15 +111,15 @@ curl "https://staging.purse.ng/transaction/invoiceRef/928397da-1ed1-11e7-bff5-0a
 
 This endpoint checks status of invoice.
 
-<aside class="warning">Call this endpoint to confirm if a customer has completed payment on their mobile phone.</aside>
+<aside class="notice">Call this endpoint to confirm if a customer has completed payment on their mobile phone.</aside>
 
 ### HTTP Request
 
-`GET https://staging.purse.ng/transaction/invoiceRef/<invoiceRef>`
+`GET https://staging.purse.ng/transaction/invoiceRef/<INVOICE_REF>`
 
 ### URL Parameters
 
 Parameter | Description
 --------- | -----------
-invoiceRef | This is a reference to the invoice. It is always returned to you when you create a new invoice.
+INVOICE_REF | This is a reference to the invoice. It is always returned to you when you create a new invoice.
 
