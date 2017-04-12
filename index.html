@@ -302,7 +302,7 @@ You must replace <code>g4Cbu09M75w1kEYIKHRmXaRCINxglbR1uWkXyg1X</code> with your
 </tr>
 <tr>
 <td>customerPhoneNumber</td>
-<td>Customer&rsquo;s Phone Number. It is also customer&rsquo;s ID on Purse.</td>
+<td>Customer&rsquo;s Phone Number.</td>
 </tr>
 <tr>
 <td>narration</td>
@@ -331,11 +331,11 @@ You must replace <code>g4Cbu09M75w1kEYIKHRmXaRCINxglbR1uWkXyg1X</code> with your
 </span></code></pre>
 <p>This endpoint checks status of invoice.</p>
 
-<aside class="warning">Call this endpoint to confirm if a customer has completed payment on their mobile phone.</aside>
+<aside class="notice">Call this endpoint to confirm if a customer has completed payment on their mobile phone.</aside>
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET https://staging.purse.ng/transaction/invoiceRef/&lt;invoiceRef&gt;</code></p>
+<p><code class="prettyprint">GET https://staging.purse.ng/transaction/invoiceRef/&lt;INVOICE_REF&gt;</code></p>
 
 <h3 id="url-parameters">URL Parameters</h3>
 
@@ -346,16 +346,16 @@ You must replace <code>g4Cbu09M75w1kEYIKHRmXaRCINxglbR1uWkXyg1X</code> with your
 </tr>
 </thead><tbody>
 <tr>
-<td>invoiceRef</td>
+<td>INVOICE_REF</td>
 <td>This is a reference to the invoice. It is always returned to you when you create a new invoice.</td>
 </tr>
 </tbody></table>
 
           <h1 id="errors">Errors</h1>
 
-<aside class="notice">This error section is stored in a separate file in `includes/_errors.md`. Slate allows you to optionally separate out your docs into many files&hellip;just save them to the `includes` folder and add them to the top of your `index.md`&lsquo;s frontmatter. Files are included in the order listed.</aside>
+<p>Purse uses conventional HTTP response codes to indicate the success or failure of an API request. Http response codes in the 2xx range simply mean all went fine and your request was successful. While Http status code is enough indication that a request was successful, we strongly recommend that you check the &ldquo;code&rdquo; parameter in the body of our response to be sure your request was trully successful. All Http response codes in the range of 4xx and 5xx indicates failure and we would provide additional information in the body of every response.</p>
 
-<p>The Kittn API uses the following error codes:</p>
+<h2 id="http-status-codes">Http Status Codes</h2>
 
 <table><thead>
 <tr>
@@ -365,49 +365,49 @@ You must replace <code>g4Cbu09M75w1kEYIKHRmXaRCINxglbR1uWkXyg1X</code> with your
 </thead><tbody>
 <tr>
 <td>400</td>
-<td>Bad Request &ndash; Your request sucks</td>
+<td>Bad Request &ndash; The request was invalid.</td>
 </tr>
 <tr>
 <td>401</td>
-<td>Unauthorized &ndash; Your API key is wrong</td>
-</tr>
-<tr>
-<td>403</td>
-<td>Forbidden &ndash; The kitten requested is hidden for administrators only</td>
+<td>Unauthorized &ndash; Your API key is wrong or missing.</td>
 </tr>
 <tr>
 <td>404</td>
-<td>Not Found &ndash; The specified kitten could not be found</td>
+<td>Not Found &ndash; The requested resource doesn&rsquo;t exist.</td>
 </tr>
 <tr>
 <td>405</td>
-<td>Method Not Allowed &ndash; You tried to access a kitten with an invalid method</td>
-</tr>
-<tr>
-<td>406</td>
-<td>Not Acceptable &ndash; You requested a format that isn&rsquo;t json</td>
-</tr>
-<tr>
-<td>410</td>
-<td>Gone &ndash; The kitten requested has been removed from our servers</td>
-</tr>
-<tr>
-<td>418</td>
-<td>I&rsquo;m a teapot</td>
-</tr>
-<tr>
-<td>429</td>
-<td>Too Many Requests &ndash; You&rsquo;re requesting too many kittens! Slow down!</td>
+<td>Method Not Allowed &ndash; Most likely wrong http method</td>
 </tr>
 <tr>
 <td>500</td>
 <td>Internal Server Error &ndash; We had a problem with our server. Try again later.</td>
 </tr>
+</tbody></table>
+
+<h2 id="error-response">Error Response</h2>
+
+<p>In addition to Http Status Codes we always send data in our response to provide more information on an error. </p>
+
+<h3 id="error-response-parameters">Error Response Parameters</h3>
+
+<table><thead>
 <tr>
-<td>503</td>
-<td>Service Unavailable &ndash; We&rsquo;re temporarily offline for maintenance. Please try again later.</td>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>code</td>
+<td>This is Purse specific code for an error. &ldquo;00&rdquo; indicates success while every other code indicates failure.</td>
+</tr>
+<tr>
+<td>message</td>
+<td>This description of the error.</td>
 </tr>
 </tbody></table>
+
+<aside class="notice">code &ldquo;00&rdquo; means your request was sucessfull. Every other code indicates failure</aside>
 
       </div>
       <div class="dark-box">
