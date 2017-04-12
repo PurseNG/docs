@@ -242,6 +242,7 @@
 <p>All you need to do is format your request header like:</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
+
 curl <span class="s2">"api_endpoint_here"</span>
   -H <span class="s2">"Authorization: Purse g4Cbu09M75w1kEYIKHRmXaRCINxglbR1uWkXyg1X"</span>
 </code></pre>
@@ -254,6 +255,15 @@ curl <span class="s2">"api_endpoint_here"</span>
 <aside class="notice">
 You must replace <code>g4Cbu09M75w1kEYIKHRmXaRCINxglbR1uWkXyg1X</code> with your personal API key.
 </aside>
+
+<h1 id="transaction-flow">Transaction Flow</h1>
+
+<p>Accepting payment with our API involves two simple steps:</p>
+
+<ol>
+<li><p>Create/Push Invoice - This is done by calling our &ldquo;Create  invoice endpoint&rdquo;. When you create an invoice, it is pushed to your customers mobile phone and they can approve or cancel the invoice.</p></li>
+<li><p>Confirm Payment - This is done by calling the &ldquo;Get invoice status endpoint&rdquo;. This basically tells you the customer has paid and you can give value.</p></li>
+</ol>
 
 <h1 id="invoices">Invoices</h1>
 
@@ -406,7 +416,11 @@ You must replace <code>g4Cbu09M75w1kEYIKHRmXaRCINxglbR1uWkXyg1X</code> with your
 <td>This description of the error.</td>
 </tr>
 </tbody></table>
-
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1008"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"No pending invoice found."</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
 <aside class="notice">code &ldquo;00&rdquo; means your request was sucessfull. Every other code indicates failure</aside>
 
       </div>
