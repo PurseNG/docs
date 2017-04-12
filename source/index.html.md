@@ -70,9 +70,9 @@ curl "https://staging.purse.ng/invoices" \
 }
 ```
 
-> "message" fro above should be displayed to your customer to give direction on how to approve the invoice.
+> "message" from above should be displayed to your customer to give direction on how to approve the invoice.
 
-This endpoint creates an invoice on Purse.
+This endpoint creates an invoice on Purse. The created invoice is also pushed to the customer for authorization in realtime.
 
 ### HTTP Request
 
