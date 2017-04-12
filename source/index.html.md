@@ -48,15 +48,15 @@ You must replace <code>g4Cbu09M75w1kEYIKHRmXaRCINxglbR1uWkXyg1X</code> with your
 
 
 ```shell
-curl "https://staging.purse.ng/invoices" \
+curl "https://staging.purse.ng/transaction/create" \
 -H "Authorization: Purse API_KEY" \
 -H "Content-Type: application/json" \
 -d '{
-  "customerCountryCode":"234",
-  "customerPhoneNumber":"08052000000",
-  "narration":"Coffee Payment",
-  "totalAmount":3000
-}' \ 
+        "customerCountryCode":"234",
+        "customerPhoneNumber":"08052000000",
+        "narration":"Coffee Payment",
+        "totalAmount":3000
+    }' \ 
 -X POST
 ```
 
@@ -76,72 +76,50 @@ This endpoint creates an invoice on Purse. The created invoice is also pushed to
 
 ### HTTP Request
 
-`POST http://staging.purse.ng/api/invoices`
+`POST http://staging.purse.ng/transaction/create`
 
 ### Post Parameters
 
 Parameter | Description
 --------- | ------- 
-walletMsisdn | Customer's ID on Purse.
+customerCountryCode | Customer's Country Code.
+customerPhoneNumber | Customer's Phone Number. It is also customer's ID on Purse.
 narration | A description for the charge/transaction.
 totalAmount | Total amount to charge in naira.
 
 
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
 
-## Get a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
-```
+## Get Invoice Status
 
 ```shell
-curl "http://example.com/api/kittens/2"
-  -H "Authorization: meowmeowmeow"
+curl "https://staging.purse.ng/transaction/invoiceRef/928397da-1ed1-11e7-bff5-0a80cc3ac5be" \
+-H "Authorization: Purse API_KEY" \
+-H "Content-Type: application/json" \
+-X GET
 ```
 
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.get(2);
-```
 
 > The above command returns JSON structured like this:
 
 ```json
 {
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
+  "code": "00",
+  "message": "Successful",
+  "invoiceRef": "a8d6653b-0807-11e7-b268-6e3d1fd873c3"
 }
 ```
 
-This endpoint retrieves a specific kitten.
+This endpoint checks status of invoice.
 
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+<aside class="warning">Call this endpoint to confirm if a customer has completed payment on their mobile phone.</aside>
 
 ### HTTP Request
 
-`GET http://example.com/kittens/<ID>`
+`GET https://staging.purse.ng/transaction/invoiceRef/<invoiceRef>`
 
 ### URL Parameters
 
 Parameter | Description
 --------- | -----------
-ID | The ID of the kitten to retrieve
+invoiceRef | This is a reference to the invoice. It is always returned to you when you create a new invoice.
 
