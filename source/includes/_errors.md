@@ -26,4 +26,12 @@ Parameter | Description
 code | This is Purse specific code for an error. "00" indicates success while every other code indicates failure.
 message | This description of the error.
 
+
+```json
+{
+  "code": "1008",
+  "message": "No pending invoice found."
+}
+```
+
 <aside class="notice">code "00" means your request was sucessfull. Every other code indicates failure</aside>

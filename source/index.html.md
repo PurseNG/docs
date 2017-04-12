@@ -30,6 +30,7 @@ To get authenticated on Purse, please include your API key in the Authorization 
 
 ```shell
 # With shell, you can just pass the correct header with each request
+
 curl "api_endpoint_here"
   -H "Authorization: Purse g4Cbu09M75w1kEYIKHRmXaRCINxglbR1uWkXyg1X"
 ```
@@ -41,6 +42,14 @@ curl "api_endpoint_here"
 <aside class="notice">
 You must replace <code>g4Cbu09M75w1kEYIKHRmXaRCINxglbR1uWkXyg1X</code> with your personal API key.
 </aside>
+
+# Transaction Flow
+Accepting payment with our API involves two simple steps:
+
+1. Create/Push Invoice - This is done by calling our "Create  invoice endpoint". When you create an invoice, it is pushed to your customers mobile phone and they can approve or cancel the invoice.
+
+2. Confirm Payment - This is done by calling the "Get invoice status endpoint". This basically tells you the customer has paid and you can give value.
+
 
 # Invoices
 
